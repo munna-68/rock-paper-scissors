@@ -1,5 +1,5 @@
-function getComputerChoise() {
-  let computerChoise;
+function getComputerChoice() {
+  let computerChoice;
   let randomNumber = Math.floor(Math.random() * (4 - 1)) + 1;
   switch(randomNumber) {
     case 1:
@@ -12,7 +12,7 @@ function getComputerChoise() {
       computerChoise = 'scissor';
       break;  
   }
-  return computerChoise;
+  return computerChoice;
 }
 
-console.log(getComputerChoise())
+function getHumanChoice() 
