@@ -16,5 +16,20 @@ function getComputerChoice() {
 }
 
 function getHumanChoice() {
+  let humanChoice;
+  let promptingUser = prompt("Chose between rock paper scissor");
+  let userChoice = promptingUser.toLowerCase();
   
+  if(userChoice == "rock") {
+    humanChoice = "rock"
+  } else if(userChoice == "paper") {
+    humanChoice = "paper"
+  } else if(userChoice == "scissor") {
+    humanChoice = "scissor"
+  } else {
+    alert("make sure your spelling is correct")
+  }
+
+  return humanChoice;
 }
+
