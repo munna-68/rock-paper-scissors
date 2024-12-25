@@ -8,7 +8,20 @@
 </head>
 <body>
   <h2>Rock Paper Scissors</h2>
-  <h4>To play open the console</h4>
-  <button onclick="playGame()">Play Game</button>
+  <button id = "play-game-btn">Play Game</button>
+  <!-- user input -->
+  <select id="user-input">
+    <option value="rock">Rock</option>
+    <option value="paper">Paper</option>
+    <option value="scissor">Scissor</option>
+  </select>
+  <button id="submit-btn">Submit</button>
+
+<div>
+  <p class="game-log"></p>
+</div>
+
+<h3 id="user-score"></h3>
+<h3 id="computer-score"></h3>
 </body>
 </html>
