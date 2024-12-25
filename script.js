@@ -1,3 +1,10 @@
+const playGameBtn = document.querySelector("#play-game-btn");
+const toggleInput = document.getElementById("user-input");
+const submitBtn = document.getElementById("submit-btn");
+const gameLog = document.getElementById("game-log");
+const userScore = document.getElementById("user-score");
+const computerScore = document.getElementById("computer-score");
+
 
 function playGame() {
   function getComputerChoice() {
