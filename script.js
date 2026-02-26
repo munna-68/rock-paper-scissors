@@ -9,6 +9,7 @@ const resultDetailEl = document.getElementById("result-detail");
 const promptTextEl = document.getElementById("prompt-text");
 const historyListEl = document.getElementById("history-list");
 const resetBtn = document.getElementById("reset-btn");
+const themeToggleBtn = document.getElementById("theme-toggle");
 const choiceBtns = document.querySelectorAll(".choices__btn");
 
 // ===== Game State =====
@@ -26,6 +27,28 @@ const CHOICES = {
   paper: { emoji: "Paper", beats: "rock", verb: "covers" },
   scissors: { emoji: "Scissors", beats: "paper", verb: "cuts" },
 };
+
+const THEME_STORAGE_KEY = "rps-theme";
+
+function applyTheme(theme) {
+  document.documentElement.setAttribute("data-theme", theme);
+  themeToggleBtn.textContent = theme === "dark" ? "Dark" : "Day";
+}
+
+function toggleTheme() {
+  const currentTheme =
+    document.documentElement.getAttribute("data-theme") || "day";
+  const nextTheme = currentTheme === "dark" ? "day" : "dark";
+  applyTheme(nextTheme);
+  localStorage.setItem(THEME_STORAGE_KEY, nextTheme);
+}
+
+function initializeTheme() {
+  const storedTheme = localStorage.getItem(THEME_STORAGE_KEY);
+  const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+  const initialTheme = storedTheme || (prefersDark ? "dark" : "day");
+  applyTheme(initialTheme);
+}
 
 // ===== Computer Choice =====
 function getComputerChoice() {
@@ -244,6 +267,7 @@ choiceBtns.forEach((btn) => {
 });
 
 resetBtn.addEventListener("click", resetGame);
+themeToggleBtn.addEventListener("click", toggleTheme);
 
 // Keyboard support: 1=Rock, 2=Paper, 3=Scissors
 document.addEventListener("keydown", (e) => {
@@ -251,3 +275,5 @@ document.addEventListener("keydown", (e) => {
   const keyMap = { 1: "rock", 2: "paper", 3: "scissors" };
   if (keyMap[e.key]) playRound(keyMap[e.key]);
 });
+
+initializeTheme();
