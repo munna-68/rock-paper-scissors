@@ -22,9 +22,9 @@ const state = {
 
 // ===== Choice Config =====
 const CHOICES = {
-  rock: { emoji: "✊", beats: "scissors", verb: "crushes" },
-  paper: { emoji: "🖐️", beats: "rock", verb: "covers" },
-  scissors: { emoji: "✌️", beats: "paper", verb: "cuts" },
+  rock: { emoji: "Rock", beats: "scissors", verb: "crushes" },
+  paper: { emoji: "Paper", beats: "rock", verb: "covers" },
+  scissors: { emoji: "Scissors", beats: "paper", verb: "cuts" },
 };
 
 // ===== Computer Choice =====
@@ -47,28 +47,6 @@ function animateScore(element) {
   element.classList.add("score-pop");
 }
 
-// ===== Spawn Celebration Particles =====
-function spawnParticles(type) {
-  const emojis =
-    type === "win"
-      ? ["🎉", "⭐", "✨", "🏆", "🥳"]
-      : type === "lose"
-        ? ["💀", "😵", "💥"]
-        : ["🤝", "😐"];
-
-  for (let i = 0; i < (type === "win" ? 8 : 4); i++) {
-    const particle = document.createElement("div");
-    particle.classList.add("particle");
-    particle.textContent = emojis[Math.floor(Math.random() * emojis.length)];
-    particle.style.left = `${30 + Math.random() * 40}%`;
-    particle.style.top = `${20 + Math.random() * 20}%`;
-    particle.style.animationDuration = `${1 + Math.random() * 1}s`;
-    particle.style.animationDelay = `${Math.random() * 0.3}s`;
-    document.body.appendChild(particle);
-    setTimeout(() => particle.remove(), 2000);
-  }
-}
-
 // ===== Update UI =====
 function updateScoreboard() {
   playerScoreEl.textContent = state.playerScore;
@@ -79,17 +57,17 @@ function updateScoreboard() {
 function showResult(outcome, playerChoice, computerChoice) {
   const resultMap = {
     win: {
-      text: "You Win! 🎉",
+      text: "You won",
       cssClass: "result__text--win",
       detail: `${capitalize(playerChoice)} ${CHOICES[playerChoice].verb} ${computerChoice}`,
     },
     lose: {
-      text: "You Lose 😢",
+      text: "You lost",
       cssClass: "result__text--lose",
       detail: `${capitalize(computerChoice)} ${CHOICES[computerChoice].verb} ${playerChoice}`,
     },
     tie: {
-      text: "It's a Tie 🤝",
+      text: "Draw",
       cssClass: "result__text--tie",
       detail: `Both chose ${playerChoice}`,
     },
@@ -125,7 +103,7 @@ function addHistoryItem(round, outcome, playerChoice, computerChoice) {
     <span class="history__round">#${round}</span>
     <span class="history__moves">
       ${CHOICES[playerChoice].emoji}
-      <span style="opacity:0.3; font-size:0.8rem;">vs</span>
+      <span style="opacity:0.3; font-size:0.8rem; margin: 0 0.5rem;">vs</span>
       ${CHOICES[computerChoice].emoji}
     </span>
     <span class="history__result-badge ${badgeClass}">${badgeText}</span>
@@ -200,7 +178,6 @@ async function playRound(playerChoice) {
   updateScoreboard();
   showResult(outcome, playerChoice, computerChoice);
   addHistoryItem(state.round, outcome, playerChoice, computerChoice);
-  spawnParticles(outcome);
 
   // Shake on lose
   if (outcome === "lose") {
@@ -208,7 +185,7 @@ async function playRound(playerChoice) {
     setTimeout(() => playerEmojiEl.classList.remove("shake"), 600);
   }
 
-  promptTextEl.textContent = "Pick your next move";
+  promptTextEl.textContent = "Select your next move";
 
   // Re-enable after a small delay
   await sleep(600);
@@ -230,8 +207,8 @@ function resetGame() {
 
   updateScoreboard();
 
-  playerEmojiEl.textContent = "❓";
-  computerEmojiEl.textContent = "❓";
+  playerEmojiEl.textContent = "";
+  computerEmojiEl.textContent = "";
   playerEmojiEl.classList.remove("battle__emoji--active");
   computerEmojiEl.classList.remove("battle__emoji--active");
 
@@ -240,10 +217,10 @@ function resetGame() {
   resultDetailEl.className = "result__detail";
   resultDetailEl.textContent = "";
 
-  promptTextEl.textContent = "Pick your move below";
+  promptTextEl.textContent = "Select your move";
 
   historyListEl.innerHTML =
-    '<div class="history__empty">No rounds played yet</div>';
+    '<div class="history__empty">No rounds played</div>';
 
   choiceBtns.forEach((btn) => {
     btn.classList.remove("choices__btn--selected", "choices__btn--disabled");

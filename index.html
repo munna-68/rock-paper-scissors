@@ -5,100 +5,67 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Rock Paper Scissors</title>
     <link rel="stylesheet" href="./style.css" />
-    <link
-      rel="icon"
-      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✊</text></svg>"
-    />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   </head>
   <body>
-    <!-- Header -->
-    <header class="header">
-      <div class="header__icon">🎮</div>
-      <h1 class="header__title">Rock Paper Scissors</h1>
-      <p class="header__subtitle">Choose your weapon. Best of luck!</p>
-    </header>
+    <div class="app-container">
+      <header class="header">
+        <div class="header__top">
+          <h1 class="header__title">Rock Paper Scissors</h1>
+          <button class="reset-btn" id="reset-btn">Reset</button>
+        </div>
+        
+        <div class="scoreboard">
+          <div class="scoreboard__item">
+            <span class="scoreboard__label">Player</span>
+            <span class="scoreboard__value" id="player-score">0</span>
+          </div>
+          <div class="scoreboard__item">
+            <span class="scoreboard__label">Draws</span>
+            <span class="scoreboard__value" id="draw-score">0</span>
+          </div>
+          <div class="scoreboard__item">
+            <span class="scoreboard__label">Computer</span>
+            <span class="scoreboard__value" id="computer-score">0</span>
+          </div>
+        </div>
+      </header>
 
-    <!-- Scoreboard -->
-    <section class="scoreboard">
-      <div class="scoreboard__card scoreboard__card--player">
-        <div class="scoreboard__label">You</div>
-        <div class="scoreboard__score" id="player-score">0</div>
-      </div>
-      <div class="scoreboard__card scoreboard__card--draws">
-        <div class="scoreboard__label">Draws</div>
-        <div class="scoreboard__score" id="draw-score">0</div>
-      </div>
-      <div class="scoreboard__card scoreboard__card--computer">
-        <div class="scoreboard__label">Computer</div>
-        <div class="scoreboard__score" id="computer-score">0</div>
-      </div>
-    </section>
-
-    <!-- Game Arena -->
-    <section class="arena">
-      <div class="arena__card">
-        <!-- Battle Display -->
+      <main class="arena">
         <div class="battle">
-          <div class="battle__player">
-            <div class="battle__emoji" id="player-emoji">❓</div>
-            <span class="battle__name">You</span>
+          <div class="battle__side">
+            <div class="battle__label">You</div>
+            <div class="battle__emoji" id="player-emoji"></div>
           </div>
-          <span class="battle__vs">VS</span>
-          <div class="battle__player">
-            <div class="battle__emoji" id="computer-emoji">❓</div>
-            <span class="battle__name">Computer</span>
+          <div class="battle__divider"></div>
+          <div class="battle__side">
+            <div class="battle__label">Computer</div>
+            <div class="battle__emoji" id="computer-emoji"></div>
           </div>
         </div>
 
-        <!-- Result Text -->
-        <div class="result">
-          <div class="result__text" id="result-text"></div>
-          <div class="result__detail" id="result-detail"></div>
+        <div class="status">
+          <h2 class="result__text" id="result-text"></h2>
+          <p class="result__detail" id="result-detail"></p>
+          <p class="prompt" id="prompt-text">Select your move</p>
         </div>
 
-        <!-- Prompt -->
-        <p class="prompt" id="prompt-text">Pick your move below</p>
-
-        <!-- Choice Buttons -->
         <div class="choices">
-          <button
-            class="choices__btn choices__btn--rock"
-            data-choice="rock"
-            aria-label="Rock"
-          >
-            <span class="choices__emoji">✊</span>
-            <span class="choices__label">Rock</span>
-          </button>
-          <button
-            class="choices__btn choices__btn--paper"
-            data-choice="paper"
-            aria-label="Paper"
-          >
-            <span class="choices__emoji">🖐️</span>
-            <span class="choices__label">Paper</span>
-          </button>
-          <button
-            class="choices__btn choices__btn--scissors"
-            data-choice="scissors"
-            aria-label="Scissors"
-          >
-            <span class="choices__emoji">✌️</span>
-            <span class="choices__label">Scissors</span>
-          </button>
+          <button class="choices__btn" data-choice="rock">Rock</button>
+          <button class="choices__btn" data-choice="paper">Paper</button>
+          <button class="choices__btn" data-choice="scissors">Scissors</button>
         </div>
-      </div>
-    </section>
+      </main>
 
-    <!-- Round History -->
-    <section class="history">
-      <div class="history__title"><span>📋</span> Round History</div>
-      <div class="history__list" id="history-list">
-        <div class="history__empty">No rounds played yet</div>
-      </div>
-    </section>
-
-    <!-- Reset -->
-    <button class="reset-btn" id="reset-btn">Reset Game</button>
+      <section class="history">
+        <h3 class="history__title">History</h3>
+        <div class="history__list" id="history-list">
+          <div class="history__empty">No rounds played</div>
+        </div>
+      </section>
+    </div>
 
     <script src="./script.js" defer></script>
   </body>
